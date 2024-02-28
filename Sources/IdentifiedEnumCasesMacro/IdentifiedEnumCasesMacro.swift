@@ -30,7 +30,7 @@ public struct IdentifiedEnumCasesMacro: MemberMacro {
         return []
       }
 
-      let caseIds: [String] = enumCases.compactMap { enumCase in
+      let kinds: [String] = enumCases.compactMap { enumCase in
         guard let firstToken = enumCase.firstToken(viewMode: .fixedUp) else {
           return nil
         }
@@ -42,15 +42,15 @@ public struct IdentifiedEnumCasesMacro: MemberMacro {
         return id
       }
       
-      guard !caseIds.isEmpty else {
+      guard !kinds.isEmpty else {
         let enumError = Diagnostic(node: node._syntaxNode, message: Diagnostics.mustHaveCases)
         context.diagnose(enumError)
         return []
       }
 
       let modifier = declaration.hasPublicModifier ? "public " : ""
-      let enumID = "\(modifier)enum CaseID: String, Hashable, CaseIterable, CustomStringConvertible {\n\(caseIds.map { "  case \($0)\n" }.joined())\n  \(modifier)var description: String {\nself.rawValue\n  }\n}"
-      let idAccessor = "\(modifier)var caseID: CaseID {\n  switch self {\n\(caseIds.map { "  case .\($0): .\($0)\n" }.joined())  }\n}"
+      let enumID = "\(modifier)enum Kind: String, Hashable, CaseIterable, CustomStringConvertible {\n\(kinds.map { "  case \($0)\n" }.joined())\n  \(modifier)var description: String {\nself.rawValue\n  }\n}"
+      let idAccessor = "\(modifier)var kind: Kind {\n  switch self {\n\(kinds.map { "  case .\($0): .\($0)\n" }.joined())  }\n}"
 
       return [
         DeclSyntax(stringLiteral: enumID),

@@ -34,7 +34,7 @@ final class MacroTests: XCTestCase {
               enum TomatoVariety {}
               enum EggplantVariety {}
             
-              enum CaseID: String, Hashable, CaseIterable, CustomStringConvertible {
+              enum Kind: String, Hashable, CaseIterable, CustomStringConvertible {
                 case potato
                 case tomato
                 case eggplant
@@ -44,7 +44,7 @@ final class MacroTests: XCTestCase {
                 }
               }
             
-              var caseID: CaseID {
+              var kind: Kind {
                 switch self {
                 case .potato:
                   .potato
@@ -85,7 +85,7 @@ final class MacroTests: XCTestCase {
             public enum TomatoVariety {}
             public enum EggplantVariety {}
           
-            public enum CaseID: String, Hashable, CaseIterable, CustomStringConvertible {
+            public enum Kind: String, Hashable, CaseIterable, CustomStringConvertible {
               case potato
               case tomato
               case eggplant
@@ -95,7 +95,7 @@ final class MacroTests: XCTestCase {
               }
             }
           
-            public var caseID: CaseID {
+            public var kind: Kind {
               switch self {
               case .potato:
                 .potato

@@ -52,7 +52,7 @@ enum Nightshade {
     case jalapeño, arbol, habenero
   }
 
-  var caseID: CaseID {
+  var kind: Kind {
     switch self {
     case .potato: .potato
     case .tomato: .tomato
@@ -60,7 +60,7 @@ enum Nightshade {
     }
   }
 
-  enum CaseID: String, Hashable, CaseIterable {
+  enum Kind: String, Hashable, CaseIterable {
     case potato, tomato, jalapeño
   }
 }
@@ -70,8 +70,8 @@ Very exciting!
 
 ## Public visibility
 
-If the enum is `public`, the generated `CaseID` enum and the
-generated `caseID` accessor will also be `public`. For example,
+If the enum is `public`, the generated `Kind` enum and the
+generated `kind` accessor will also be `public`. For example,
 
 ```swift
 import IdentifiedEnumCases
@@ -90,13 +90,13 @@ public enum AppRoute {
   case item(ItemRoute)
   case user(UserRoute)
 
-  public var caseID: CaseID {
+  public var kind: Kind {
     switch self {
     case .item: .item
     case .user: .user
   }
 
-  public enum CaseID: String, Hashable, CaseIterable {
+  public enum Kind: String, Hashable, CaseIterable {
     case item
     case user
   }
